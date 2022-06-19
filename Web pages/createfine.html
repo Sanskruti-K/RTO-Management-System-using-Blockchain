@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<head>
+    <style>
+
+    </style>
+    <title>RTO</title>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="main.html">RTO</a>
+    </div>
+    <ul class="nav navbar-nav">
+
+
+      <li><a href="https://transport.karnataka.gov.in/english">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+ <center><img src="rto.png" alt="">
+
+  <h1>CREATE FINE FOR USER</h1></center>
+
+  <form>
+    <div class="form-group">
+      <label for="usr">FINE AMOUNT:</label>
+      <input type="text"  id="fineAmount" class="form-control" id="usr" name="fineAmount">
+    </div>
+
+       <div class="form-group">
+      <label for="usr">FINE REASON:</label>
+      <textarea  id="fineReason" class="form-control" id="usr"></textarea>
+    </div>
+
+
+  </form>
+      <div><button type="button" onclick="ONSubmitButton()" class="btn btn-primary btn-block" id="startbutton">SUBMIT</button></div>
+<br>
+
+         <div><button type="button" onclick="viewOldFineDetails()" class="btn btn-primary btn-block" id="startbutton">Fine Details</button></div>
+
+<br>
+        
+
+</div>
+
+
+
+    <script>
+function viewOldFineDetails()
+{
+                        window.location.href = 'policeviewfine.html';
+
+}
+  
+    
+function ONSubmitButton()
+{
+
+
+var mob = /[0-9]$/;
+
+var res = /[a-zA-Z]$/;
+
+if (mob.test(fineAmount.value) == false) 
+{
+        alert("Please enter valid fine Amount.");
+        mobile.focus();
+        return false;
+    }
+
+    
+
+
+
+console.log("dasdasdas");
+
+ if( $("#fineAmount").val().length == 0 || $("#fineReason").val().length == 0 )
+  { 
+alert("Empty")
+}
+else{
+
+
+    var data = {
+    "fineAmount": $("#fineAmount").val(),
+    "fineReason": $("#fineReason").val(),
+
+
+    "address": localStorage.getItem("address"),
+    "emailID": localStorage.getItem("emailID"),
+    "mobile": localStorage.getItem("mobile"),
+    "privatekey": localStorage.getItem("privatekey"),
+    "userID": localStorage.getItem("userID"),
+    "accountID": localStorage.getItem("accountID"),
+    "userName": localStorage.getItem("userName"),
+ 
+
+
+}
+
+      $.ajax({
+       url : 'http://127.0.0.1:1111/create/fine',
+        type: "POST",
+        dataType: "json",
+          data: JSON.stringify (data),
+        contentType: 'application/json',
+
+        cache: false,
+        timeout: 5000,
+       
+        success: function(data) {
+            if(data.success == true)
+            {
+
+           
+
+
+alert("success")
+
+window.location.href = 'SearchUser.html';
+
+            }
+else{
+    alert("Pay Old Fine")
+
+}
+        }
+    });
+    }
+}
+
+    </script>
+</body>
+
+</html>

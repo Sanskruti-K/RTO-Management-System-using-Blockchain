@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<head>
+    <style>
+
+    </style>
+    <title>Vechicle_details</title>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="main.html">RTO</a>
+    </div>
+    <ul class="nav navbar-nav">
+  
+      <li><a href="https://transport.karnataka.gov.in/english">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+ <center><img src="rto.png" alt=""></center>
+
+
+  <form>
+    <div class="form-group">
+      <label for="usr">Vechicle Number:</label>
+      <input type="text"  id="Number" class="form-control" >
+    </div>
+    <div class="form-group">
+      <label for="pwd">Owner Name</label>
+      <input type="text"  id="Name" class="form-control" >
+    </div>
+        <div class="form-group">
+      <label for="pwd">RC Number</label>
+      <input type="text"  id="Rcnumber" class="form-control" >
+    </div>
+         <div class="form-group">
+      <label for="pwd">Insurance valid Up To</label>
+      <input type="date"  id="Insurance" class="form-control">
+    </div>
+      
+           <div class="form-group">
+      <label for="pwd">Emession valid Up to</label>
+      <input type="date"  id="Emession" class="form-control">
+    </div>
+
+
+           <div class="form-group">
+      <label for="pwd">Gmail</label>
+      <input type="email"  id="Gmail" class="form-control">
+    </div>
+
+      <div class="form-group">
+      <label for="pwd">Phone Numner</label>
+      <input type="text"  id="phone" class="form-control">
+    </div>
+
+
+
+
+
+  </form>
+      <div><button type="button"  onclick="ONSubmitButton()" class="btn btn-primary btn-block" id="startbutton">REGISTER</button></div>
+
+
+
+</div>
+
+
+
+    <script>
+    
+function ONSubmitButton()
+{
+    var data = {
+    "Number": $("#Number").val(),
+    "Name": $("#Name").val(),
+    "Rcnumber": $("#Rcnumber").val(),
+    "Insurance": $("#Insurance").val(),
+    "Emession": $("#Emession").val(),
+    "Gmail": $("#Gmail").val(),
+    "phone": $("#phone").val(),
+}
+
+console.log(data);
+
+    $.ajax({
+       url : 'http://127.0.0.1:1111/user/addvechicle',
+        type: "POST",
+        dataType: "json",
+          data: JSON.stringify (data),
+        contentType: 'application/json',
+
+        cache: false,
+        timeout: 5000,
+       
+        success: function(data) {
+            if(data.success == true)
+            {
+
+window.location.href = 'login.html';
+
+
+
+alert("success")
+            }
+else{
+    alert("Error")
+}
+        }
+    });
+}
+
+    </script>
+</body>
+
+</html>

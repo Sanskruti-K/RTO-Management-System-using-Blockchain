@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<head>
+    <style>
+
+    </style>
+    <title>RTO</title>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">RTO</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/Users/apple/Documents/debzy/Techno/crytonode/register.html">Register</a></li>
+      <li><a href="/Users/apple/Documents/debzy/Techno/crytonode/login.html">Login</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+ <center><img src="rto.png" alt="">
+ <h1>ADMIN REGISTER</h1>
+ </center>
+
+
+  <form>
+    <div class="form-group">
+      <label for="usr">Name:</label>
+      <input type="text"  id="userName" class="form-control" >
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="text"  id="password" class="form-control" >
+    </div>
+
+
+
+  </form>
+      <div><button type="button"  onclick="ONSubmitButton()" class="btn btn-primary btn-block" id="startbutton">REGISTER</button></div>
+
+
+
+</div>
+
+
+
+    <script>
+    
+function ONSubmitButton()
+{
+
+ if( $("#userName").val().length == 0 || $("#password").val().length == 0 )
+  { 
+alert("Empty")
+}
+
+else{
+
+    var data = {
+    "userName": $("#userName").val(),
+    "password": $("#password").val(),}
+
+console.log(data);
+
+    $.ajax({
+       url : 'http://127.0.0.1:1111/admin/register',
+        type: "POST",
+        dataType: "json",
+          data: JSON.stringify (data),
+        contentType: 'application/json',
+
+        cache: false,
+        timeout: 5000,
+       
+        success: function(data) {
+            if(data.success == true)
+            {
+
+window.location.href = 'adminlogin.html';
+
+
+
+alert("success")
+            }
+else{
+    alert("Error")
+}
+        }
+    });
+
+  }
+}
+
+    </script>
+</body>
+
+</html>

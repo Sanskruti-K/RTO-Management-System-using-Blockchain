@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<head>
+  <script type="text/javascript">
+    
+
+var finer;
+
+
+      function onPageloaderz()
+      {
+
+
+    var data = {
+    "userID": localStorage.getItem("userID"),
+
+}
+    $.ajax({
+       url : 'http://127.0.0.1:1111/user/getfinedetails',
+        type: "POST",
+        dataType: "json",
+          data: JSON.stringify (data),
+        contentType: 'application/json',
+
+        cache: false,
+        timeout: 5000,
+       
+        success: function(data) {
+            if(data.success == true)
+            {
+
+    console.log(data)
+
+finer =  data.userObj.fineAmount;
+
+            console.log("hhhhhhhh")
+        var userName = document.getElementById("userName");
+         userName.innerHTML = "User Name:" + localStorage.getItem("userName");
+
+
+                 var address = document.getElementById("address");
+         address.innerHTML = "Address:" + localStorage.getItem("address");
+
+                 var emailID = document.getElementById("emailID");
+         emailID.innerHTML = "Email:" + localStorage.getItem("emailID");
+
+
+                 var mobile = document.getElementById("mobile");
+         mobile.innerHTML = "Mobile:" + localStorage.getItem("mobile");
+
+
+                 var privatekey = document.getElementById("privatekey");
+         privatekey.innerHTML = "Private Key:" + localStorage.getItem("privatekey");
+
+
+                  var accountID = document.getElementById("accountID");
+         accountID.innerHTML = "Account ID:" + localStorage.getItem("accountID");
+
+
+
+
+                  var fineAmount = document.getElementById("fineAmount");
+         fineAmount.innerHTML = "Fine Amount:" + data.userObj.fineAmount;
+
+  $('#paybutton').prop('disabled', false);
+            }
+else{
+      $('#paybutton').prop('disabled', true);
+    alert("No fine")
+
+
+}
+        }
+    });
+
+
+
+
+
+  
+
+      }
+
+
+      function ONSubmitButton()
+{
+
+console.log("jjjjjjjjjjj")
+
+
+    var data = {
+   "userID": localStorage.getItem("userID"),
+   "privatekey":localStorage.getItem("privatekey"),
+   "accountID":localStorage.getItem("accountID"),
+   "fineAmount": finer, 
+ 
+
+}
+
+console.log(data)
+    $.ajax({
+       url : 'http://127.0.0.1:1111/user/payfine',
+        type: "POST",
+        dataType: "json",
+          data: JSON.stringify (data),
+        contentType: 'application/json',
+
+        cache: false,
+        timeout: 5000,
+       
+        success: function(data) {
+            if(data.success == true)
+            {
+
+
+alert("success")
+
+//window.location.href = '/Users/apple/Documents/debzy/Techno/crytonode/payfine.html';
+
+            }
+else{
+    alert("Error")
+}
+        }
+    });
+}
+  </script>
+    <style>
+
+    </style>
+    <title>RTO</title>
+</head>
+
+<body onload="onPageloaderz()">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="main.html">RTO</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="https://transport.karnataka.gov.in/english">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+ <center><img src="rto.png" alt="">
+<h3>PAY FINE</h3></center>
+
+<center>
+
+ <h2 id="userName">No Data</h2>
+  <h2 id="address">No Data</h2>
+   <h2 id="mobile">No Data</h2>
+    <h2 id="emailID">No Data</h2>
+     <h2 id="accountID">No Data</h2>
+     <h2 id="privatekey">No Data</h2>
+     <h2 id="fineAmount">No Data</h2>
+
+
+ </center>
+
+
+
+      <div><button type="button" onclick="ONSubmitButton()" class="btn btn-primary btn-block" id="paybutton">USER   New PAY FINE</button></div>
+
+<br>
+        <div><button type="button" onclick="getUserDetails()" class="btn btn-primary btn-block" id="startbutton"> USER DETAILS</button></div>
+
+</div>
+
+
+
+    <script>
+
+
+function getUserDetails()
+{
+                        window.location.href = 'userdetails.html';
+
+}
+
+    
+
+
+    </script>
+</body>
+
+</html>

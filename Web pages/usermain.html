@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<head>
+    <style>
+
+    </style>
+    <title>RTO</title>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="main.html">RTO</a>
+    </div>
+    <ul class="nav navbar-nav">
+
+     
+      <li><a href="https://transport.karnataka.gov.in/english">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+ <center><img src="rto.png" alt="">
+
+  <h1>USER LOGIN</h1></center>
+
+      <div><a href="view_vechicle_details1.html"><button type="button" class="btn btn-primary btn-block" id="startbutton">View Details</button></a></div><br>
+       <div><a href="UserraiseComplaint.html"><button type="button" class="btn btn-primary btn-block" id="startbutton" name="Registerr">Complaint Register</button></a></div><br>
+       <div><a href="payfine.html"><button type="button" class="btn btn-primary btn-block" id="startbutton" name="Registerr">View Fine</button></a></div><br>
+      <div><button type="submit" onclick="ONlogout()" class="btn btn-primary btn-block" id="startbutton">LOG OUT</button></div>
+
+
+
+</div>
+
+
+
+    <script>
+  function ONlogout()
+  {
+    localStorage.clear();
+    window.location.href ="login.html"
+  }
+function ONSubmitButton()
+{
+    var data = {
+    "userName": $("#name").val(),
+    "password": $("#password").val()
+ 
+
+}
+    $.ajax({
+       url : 'http://127.0.0.1:1111/user/login',
+        type: "POST",
+        dataType: "json",
+          data: JSON.stringify (data),
+        contentType: 'application/json',
+
+        cache: false,
+        timeout: 5000,
+       
+        success: function(data) {
+            if(data.success == true)
+            {
+
+                
+console.log("eeeeee")
+console.log(localStorage.getItem("accountID"))
+console.log("ffffff")
+alert("success")
+
+window.location.href = 'view_vechicle_details.html';
+
+            }
+else{
+    alert("Error")
+}
+        }
+    });
+}
+
+    </script>
+</body>
+
+</html>
